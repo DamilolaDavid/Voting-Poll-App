@@ -15,7 +15,7 @@ const mongoose = require("mongoose");
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.ATLAS_URI || 'mongodb+srv://petegambo:YzTqJYDc74sdJLdp@cluster0.nj1a84x.mongodb.net/?retryWrites=true&w=majority';
+const uri = process.env.ATLAS_URI;
 
 mongoose.connect(uri, { useNewUrlParser: true});
 
@@ -28,6 +28,8 @@ const usersRoute = require('./routes/users')
 
 const contestRoute = require('./routes/contest')
 
+const contestantsRoute = require('./routes/contestants')
+
 const votesRoute = require('./routes/votes')
 
 // In-memory user storage (for the sake of this example)
@@ -36,11 +38,11 @@ const users = [
   { id: 2, username: "admin", password: "admin" },
 ];
 
-app.use('/users', usersRoute)
+app.use('/users', usersRoute);
 
-app.use('/contest', contestRoute)
+app.use('/contestants', contestantsRoute);
 
-// app.use('/votes', votesRoute);
+app.use('/votes', votesRoute);
 
 // // Route to register a user
 // app.post("/register", (req, res) => {

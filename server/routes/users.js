@@ -48,4 +48,26 @@ router.route('/authenticate').post((req, res) => {
      )
 })
 
+// // Route to authenticate and get a JWT token
+router.route('/logout').post((req, res) => {
+    const { email, password } = req.body
+
+    const user = User.findOne({email})
+    .then(
+         // Create a JWT token
+        user => {
+        const token = jwt.sign(
+            { user: user},
+            jwtSecretKey,
+            { expiresIn: "1s" }
+        );
+
+        res.json({ token });}
+    )
+     .catch ( err =>res.status(401).json({ message: "Authentication failed", "error": err })
+     )
+})
+
+
+
 module.exports = router;

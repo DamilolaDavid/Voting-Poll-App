@@ -6,9 +6,8 @@ const votesSchema = new Schema(
     {
         contest_id: {type: String, required: true},
         voter_id: { type: String, required: true },
-        constestant_id: { type: String, required: true },
+        contestant_id: { type: String, required: true },
         point: { type: Number, required: true },
-        date: { type: Date, required: true },
     },
     { timestamps: true }
 );
